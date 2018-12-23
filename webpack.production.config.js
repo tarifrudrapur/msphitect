@@ -54,23 +54,7 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('production')
         })
     ],
-
-    // ESLint options
-    eslint: {
-        configFile: '.eslintrc',
-        failOnWarning: false,
-        failOnError: true
-    },
-
     module: {
-        // Runs before loaders
-        preLoaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'eslint'
-            }
-        ],
         // loaders handle the assets, like transforming sass to css or jsx to js.
         loaders: [{
             test: /\.js?$/,
