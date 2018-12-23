@@ -2,12 +2,25 @@ import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import * as types from '../actions/types';
 
-const cart = (state = '', action) => {
+const cardState = {
+    products: [],
+    cartData: []
+}
+
+const cart = (state = cardState, action) => {
     switch (action.type) {
+        case types.ALL_PRODUCTS:
+            return {
+            	...state,
+            	products: action.data
+            };
         case types.CART_DATA:
-            return action.data;
+            return {
+            	...state,
+            	cartData: action.data
+            };
         default:
-            return state;
+          	return state;
     }
 };
 
