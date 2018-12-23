@@ -52,41 +52,6 @@ const renderProductCard = (item, index, handleCart, isAdded) => {
 	)
 }
 
-
-const renderOrderDetails = (item) => {
-	const cart = _.sortBy(item, [(o)=> { return o.price; }]);
-	const totalPrice = _.sumBy(cart, (o)=> { return o.price; });
-	let arr = [];
-	let sum = 0;
-	let startIndex = 0;
-	let endIndex = 0;
-	if(totalPrice <= 250) {
-		arr.push('20')
-
-	} else {
-		for(let i =0; i<cart.length;i++) {
-			sum = cart[i].price + sum;
-			if((sum + cart[i+1] && cart[i+1].price) >= 250) {
-				arr.push('>>'); 
-				sum = 0;
-			} else {
-				if(cart.length == i) {
-					sum = sum + cart[i].price;
-					arr.push('>>'); 
-				}
-				
-			}
-		}
-	}
-	console.log(arr)
-	return(
-	  <div className="col-sm-6 col-md-4">
-			
-			xxx
-		</div>
-	)
-}
-
 class App extends React.Component {
 	state = {
 		isPlaced: false
