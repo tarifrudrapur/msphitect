@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import React from 'react';
-import './styles/main.scss';
-import * as actions from './actions' 
+import * as actions from '../actions' 
 import _ from 'lodash';
 
 
@@ -93,6 +92,7 @@ class App extends React.Component {
   	if(this.state.isPlaced) {
   		var sum = 0;
   		var arr = [0];
+
   		var cart = _.sortBy(cartData, [(o)=> { return o.price; }]);
   		var totalPrice = _.sumBy(cart, (o)=> { return o.price; });
   		if(totalPrice <= 250) {
@@ -105,7 +105,7 @@ class App extends React.Component {
   					result.push({index: i-1, data: temp.splice(arr.length, i)})
   					sum = 0;
   				} else {
-  					if(cart.length == i+1) {
+  					if(cart.length == i+1 ) {
 							sum = sum + cart[i].price;
 							var temp = [...cart]
 							result.push({index: i-1, data: temp.splice(arr.length, i)})
@@ -113,16 +113,22 @@ class App extends React.Component {
   				}
   			}
   		}
-
-  		for(var j=result.length;j>0;j--) {
+     
+   		for(var j=result.length;j>0;j--) {
   			if(result[j] && result[j].data && result[j-1] && result[j-1].data) {
   				result[j].data = result[j].data.filter(val => !result[j-1].data.includes(val));
   				
   			}
   		}
+
+  		if(cart && cart[0] && result.length > 0) {
+  			var isFirstSkiped = _.find(result[0].data, (o)=> { return o.name == cart[0].name; });
+  			if(!isFirstSkiped) {
+  				result[0].data.unshift(cart[0])
+  			}
+  		}
   	}
 
-  	console.log(result)
 	  return (
 	  	<div style={{padding: 20}} className="container">
 		  { !this.state.isPlaced ?

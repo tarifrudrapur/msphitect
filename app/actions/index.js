@@ -1,5 +1,5 @@
 import * as types from './types';
-import { getProductList } from '../Helper' 
+import { getProductList } from '../helper' 
 
 export function getProducts() {
     return {
