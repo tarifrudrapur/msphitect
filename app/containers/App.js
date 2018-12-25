@@ -95,12 +95,12 @@ class App extends React.Component {
 
   		var cart = _.sortBy(cartData, [(o)=> { return o.price; }]);
   		var totalPrice = _.sumBy(cart, (o)=> { return o.price; });
-  		if(totalPrice <= 250) {
+  		if(totalPrice < 250) {
   			result.push({index: 0, data: cart})
   		} else {
   			for(var i =0; i<cart.length;i++) {
   				sum = cart[i].price + sum;
-  				if((sum + (cart[i+1] && cart[i+1].price)) >= 250) {
+  				if((sum + (cart[i+1] && cart[i+1].price)) > 251) {
   					var temp = [...cart]
   					result.push({index: i-1, data: temp.splice(arr.length, i)})
   					sum = 0;
